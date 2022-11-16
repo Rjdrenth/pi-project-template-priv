@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "{{cookiecutter.python_package_name}}"
+version = "0.1.0"
+description = ""
+authors = ["{{cookiecutter.author}} <{{cookiecutter.author_email}}>"]
+
+[tool.poetry.dependencies]
+python = ">={{cookiecutter.minimum_python_version}},<3.11"
+python-dotenv = "^0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+cookiecutter = "^2.1.1"
+ipykernel = "^5.3.0"
+isort = "^5.8.0"
+nb-black-only = ">=1.0.9"
+pre-commit = "^2.11.1"
+pytest = "^6.2.5"
+
+# [tool.poetry.group.project_management.dependencies] # Available from poetry >= 1.2
+bump2version = "^1.0.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3

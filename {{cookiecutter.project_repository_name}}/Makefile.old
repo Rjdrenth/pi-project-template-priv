@@ -1,0 +1,168 @@
+# State that we're using bash as shell, so we can use the `source` command
+SHELL := /bin/bash
+
+
+poetry:
+	@echo ""
+	@echo "----------------------"
+	@echo "- Installing poetry virtual environment.."
+	@echo "----------------------"
+	poetry self update
+	poetry run pip install --upgrade pip
+	poetry env use $$(which python3)
+	poetry install
+	@echo "Finished installing virtual environment."
+
+register-jupyter-kernel:
+	@echo ""
+	@echo "----------------------"
+	@echo "- Registering poetry environment as jupyter kernel with name '{{cookiecutter.python_package_name}}'.."
+	@echo "----------------------"
+	poetry install
+	poetry add --dev ipykernel
+	poetry run python -m ipykernel install --user --name={{cookiecutter.python_package_name}}
+	@echo "Finished registering jupyter kernel."
+	@echo "Finished registering jupyter kernel."
+
+pytest:
+	poetry run pytest --cache-clear
+
+pre-commit-install:
+	@echo ""
+	@echo "----------------------"
+	@echo "- Installing pre-commit.."
+	@echo "----------------------"
+	poetry run pre-commit install
+	@echo "Finished installing pre-commit."
+	
+pre-commit-all:
+	poetry run pre-commit run --all-files
+
+# Creates a symbolic link from the poetry virtual env, located in `.cache/pypoetry/virtualenvs/`, to `.venv`, so that pycharm can detect it automatically
+link-poetry-venv:
+	VENV_PATH=$$(poetry run which python) ;\
+	ln -s $${VENV_PATH%/bin/python} .venv ;\
+
+initialise-project: poetry pre-commit-install register-jupyter-kernel link-poetry-venv
+
+bump-version-minor:
+	poetry run bump2version minor
+
+bump-version-patch:
+	poetry run bump2version patch
+
+prepare-publish-package:
+	rm ./dist/*
+	poetry build
+
+publish-package-pypi: prepare-publish-package
+	@echo ""
+	@echo "----------------------"
+	@echo "- Attempting to publish the package to Pypi..."
+	@echo "----------------------"
+
+	@echo "TODO check how to do this for pypi - credentials and upload"
+	source ./{{cookiecutter.project_repository_name}}.env ;/
+	twine upload dist/* -u $${PYPI_USER} -p $${PYPI_PASSWORD}
+
+	@echo "----------------------"
+	@echo "- Package publisched successfully to Pypi."
+	@echo "----------------------"
+
+publish-package-google-artifacts: prepare-publish-package
+	@echo ""
+	@echo "----------------------"
+	@echo "- Attempting to publish the package to Google Artifact Registry..."
+	@echo "----------------------"
+
+	source ./{{cookiecutter.project_repository_name}}.env ;/
+	twine upload --repository-url $${GCP_ARTIFACT_URL} dist/* -u $${GCP_ARTIFACT_USER} -p $${GCP_ARTIFACT_PASSWORD}
+
+	@echo "----------------------"
+	@echo "- Package publisched successfully  to Google Artifact Registry."
+	@echo "----------------------"
+
+publish-package-azure-artifacts: prepare-publish-package
+	@echo ""
+	@echo "----------------------"
+	@echo "- Attempting to publish the package to Azure Artifacts..."
+	@echo "----------------------"
+
+	@echo "TODO check how to do this for Azure - credentials and upload"
+	source ./{{cookiecutter.project_repository_name}}.env ;/
+	twine upload --repository-url $${AZURE_ARTIFACTS_URL} dist/* -u $${AZURE_ARTIFACTS_USER} -p $${AZURE_ARTIFACTS_PASSWORD}
+
+	@echo "----------------------"
+	@echo "- Package publisched successfully to Azure Artifacts."
+	@echo "----------------------"
+
+update-project-template:
+	@echo ""
+	@echo "----------------------"
+	@echo "- Updating project according to project template..."
+	@echo "----------------------"
+
+	yes | poetry run python ./.project_template/update_project_template.py
+
+	@echo "----------------------"
+	@echo "- Project has been updated according to the latest version of the project template."
+	@echo "- Note: You must MANUALLY verify what changes were made!"
+	@echo "-       Some changes might not be appliccable for a specific project"
+	@echo "----------------------"
+
+delete-venv:
+	@echo ""
+	@echo "----------------------"
+	@echo "- Deleting virtual environment.."
+	@echo "----------------------"
+
+	sudo rm -R $$(readlink .venv) && rm .venv
+
+	@echo "----------------------"
+	@echo "- Virtual environment has been deleted"
+	@echo "----------------------"
+
+reset-venv: delete-venv initialise-project
+	@echo ""
+	@echo "----------------------"
+	@echo "- Virtual environment has been reset!"
+	@echo "----------------------"
+
+# --- Base Dockerfile - for production
+docker-build:
+	docker build --file docker/Dockerfile -t {{cookiecutter.python_package_name}} .
+
+docker-run:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}
+
+docker-test:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}} "make pytest"
+
+docker-inspect:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}} /bin/bash
+
+# --- Docker venv - for docker-based development
+docker-build-venv:
+	docker build --file docker/venv_Dockerfile -t {{cookiecutter.python_package_name}}_venv .
+
+docker-run-venv:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_venv
+
+docker-test-venv:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_venv "make pytest"
+
+docker-inspect-venv:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_venv /bin/bash
+
+# --- Pypy - for possible enhanced performance
+docker-build-pypy:
+	docker build --file docker/pypy_Dockerfile -t {{cookiecutter.python_package_name}}_pypy .
+
+docker-run-pypy:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy
+
+docker-test-pypy:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy "make pytest"
+
+docker-inspect-pypy:
+	docker run  --rm -it --network="host" --env-file .env --name {{cookiecutter.python_package_name}}.env -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy /bin/bash

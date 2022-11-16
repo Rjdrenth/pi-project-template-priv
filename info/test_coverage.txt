@@ -1,0 +1,76 @@
+🚀 Feature Request
+
+Tests coverage reporting.
+🔈 Motivation
+
+I found it in your ToDos. I implemented it for my own package pycvcqv using coverage-badge.
+🛰 Alternatives
+
+To implement such a solution:
+
+    first, edit your pyproject.toml:
+
+[tool.poetry.dev-dependencies]
+
+coverage = "*"
+
+coverage-badge = "*"
+
+pytest-html = "*"
+
+pytest-cov = "*"
+
+
+
+[tool.coverage.run]
+
+source = ['package_name', 'tests_folder']
+
+
+
+[coverage.paths]
+
+
+
+source = 'package_name'
+
+
+
+[coverage.run]
+
+branch = true
+
+
+
+[coverage.report]
+
+fail_under = 50
+
+show_missing = true
+
+    next, mkdir assets/images/.
+    Then, add these lines to Makefile:
+
+.PHONY: coverage
+
+coverage:
+
+	poetry run pytest --cov-report html --cov packagename tests/
+
+	poetry run coverage-badge -o assets/images/coverage.svg -f
+
+    Then, run these lines:
+
+make install
+
+make test && make coverage && make check-codestyle && make mypy && make check-safety
+
+    Finally, add this to the README.md:
+
+[![coverage report](assets/images/coverage.svg)]
+
+You, will have something like coverage report.
+📎 Additional context
+
+More importantly, you can open htmlcov/index.html in your browser and observe the covered/uncovered codes.
+

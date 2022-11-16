@@ -1,0 +1,37 @@
+version: '3'
+
+tasks:
+  pre-commit-install:
+    cmds:
+      - echo ""
+      - echo "----------------------"
+      - echo "- Installing pre-commit.."
+      - echo "----------------------"
+      - pre-commit install
+      - echo "Finished installing pre-commit."
+    silent: true
+
+  pre-commit-uninstall:
+    cmds:
+      - echo ""
+      - echo "----------------------"
+      - echo "- Uninstalling pre-commit.."
+      - echo "----------------------"
+      - pre-commit uninstall
+      - echo "Finished uninstalling pre-commit."
+    silent: true
+
+  pre-commit-all:
+    cmds:
+      - pre-commit run --all-files
+    silent: true
+
+  bump-version-minor:
+    cmds:
+      - bump2version minor
+    silent: true
+
+  bump-version-patch:
+    cmds:
+      - bump2version patch
+    silent: true
