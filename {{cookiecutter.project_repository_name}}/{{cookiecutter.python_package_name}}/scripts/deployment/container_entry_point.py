@@ -1,8 +1,8 @@
 def do_stuff():
 
-	pass
+    pass
 
 
 if __name__ == "__main__":
 
-	do_stuff()
+    do_stuff()

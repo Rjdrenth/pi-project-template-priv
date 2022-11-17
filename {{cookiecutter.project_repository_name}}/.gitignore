@@ -4,7 +4,7 @@
 .venv
 /venv
 
-# Downloaded python wheels 
+# Downloaded python wheels
 artifacts/
 
 # Visual studio files

@@ -4,7 +4,7 @@ tasks:
 
   # --- Base Dockerfile - for production
   build:
-    desc: Build a Docker image to run/deploy your project. 
+    desc: Build a Docker image to run/deploy your project.
     cmds:
       - docker build --file docker/Dockerfile -t {{cookiecutter.python_package_name}} .
 
@@ -23,7 +23,7 @@ tasks:
     cmds:
       - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}} "make pytest"
     silent: true
-    
+
   inspect:
     desc: Start a container and open a shell to inspect its contents and execute commands.
     cmds:

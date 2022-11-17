@@ -10,7 +10,7 @@ Running a local installation is recommended if:
 
 If this does not apply to you, move on to [Running a docker-based installation](#running-a-docker-based-installation-for-development).
 
-Run 
+Run
 ```shell
 task initialise-project
 ```
@@ -29,7 +29,7 @@ task initialise-project
 
 ### Running a WSL 2-based installation
 
-If you are using WSL, it is advised to clone your project within the WSL environment and connect to it with your IDE. 
+If you are using WSL, it is advised to clone your project within the WSL environment and connect to it with your IDE.
 
 Ensure that the prerequisites are met within your WSL distribution.
 
@@ -49,7 +49,7 @@ Running a docker-based installation is recommended if:
 
 Building Docker image
 
-#### Configuring Pycharm 
+#### Configuring Pycharm
 
 Use accompanying [/docker/dev-docker-compose.yml](/docker/dev-docker-compose.yml) file to allow setting of environment variables.
 
@@ -60,7 +60,7 @@ This section should be written by someone who uses VS Code
 
 
 ### Selecting poetry virtual env in Pycharm:
-Pycharm should automatically detect the new poetry virtual environment. If it doesn't, you will have to locate it manually. 
+Pycharm should automatically detect the new poetry virtual environment. If it doesn't, you will have to locate it manually.
 
 You can do this as follows: `File -> Settings -> Project: <your project name> -> Python Interpreter -> Click on the cog-wheel icon -> Add .. -> Virtual Environment -> Existing Environment -> click the 'three-dot icon' -> locate your virtual environment in **<repo root>/.venv/bin/python**`
 

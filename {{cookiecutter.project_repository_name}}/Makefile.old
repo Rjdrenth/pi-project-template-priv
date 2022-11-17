@@ -34,7 +34,7 @@ pre-commit-install:
 	@echo "----------------------"
 	poetry run pre-commit install
 	@echo "Finished installing pre-commit."
-	
+
 pre-commit-all:
 	poetry run pre-commit run --all-files
 

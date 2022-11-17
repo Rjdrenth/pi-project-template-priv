@@ -7,7 +7,7 @@ def test_version():
 
 if __name__ == "__main__":
     from pathlib import Path
-    
+
     import pytest
 
     pytest.main([Path(__file__).name])

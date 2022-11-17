@@ -5,7 +5,7 @@ FROM pypy:3.9-slim
 ENV POETRY_VIRTUALENVS_CREATE=false
 
 # Enable if you want to use a specific poetry version
-# POETRY_VERSION=1.2.2 
+# POETRY_VERSION=1.2.2
 
 # Install unix dependencies
 RUN apt-get update && \
@@ -17,7 +17,7 @@ RUN apt-get update && \
 	gcc
 
 # Create new user which will run the code, so we aren't running as root
-RUN useradd --create-home python_user  	
+RUN useradd --create-home python_user
 
 # Change owner of /opt folder, to maintain compatibility with the venv_Dockerfile
 RUN chown -R python_user:python_user /opt
@@ -31,7 +31,7 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 # ARG GCP_ARTIFACT_URL  $GCP_ARTIFACT_URL
 # ARG GCP_ARTIFACT_USER  $GCP_ARTIFACT_USER
 # ARG GCP_ARTIFACT_PASSWORD  $GCP_ARTIFACT_PASSWORD
-# 
+#
 # # Configure our Google Artifact repository in Poetry
 # RUN poetry config repositories.google_artifact $GCP_ARTIFACT_URL
 # RUN poetry config http-basic.google_artifact $GCP_ARTIFACT_USER $GCP_ARTIFACT_PASSWORD
@@ -44,7 +44,7 @@ ENV PATH="/home/python_user/.local/bin:$PATH"
 RUN mkdir /home/python_user/{{cookiecutter.project_repository_name}}
 WORKDIR /home/python_user/{{cookiecutter.project_repository_name}}
 
-# In order to make our package importable later on, but without copying the code (which we will copy later in the Dockerfile), 
+# In order to make our package importable later on, but without copying the code (which we will copy later in the Dockerfile),
 # we do have to create a directory with an accompanying __init__.py file so that poetry can install it (in editable mode).
 RUN mkdir {{cookiecutter.python_package_name}} && touch ./{{cookiecutter.python_package_name}}/__init__.py
 

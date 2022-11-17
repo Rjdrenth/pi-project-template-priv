@@ -23,7 +23,7 @@ tasks:
     cmds:
       - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy "make pytest"
     silent: true
-    
+
   inspect:
     desc: Start a container with the Pypy Python interpreter and open a shell to inspect its contents and execute commands.
     cmds:

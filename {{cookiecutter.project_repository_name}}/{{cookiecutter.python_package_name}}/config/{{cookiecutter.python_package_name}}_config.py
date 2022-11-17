@@ -1,7 +1,6 @@
 import os
 
 import dotenv
-
 from {{cookiecutter.python_package_name}}.config import paths
 
 # Load the .dotenv file

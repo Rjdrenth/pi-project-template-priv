@@ -4,9 +4,9 @@ This project requires the following software to be installed on your system:
 
 - Python 3.9 or higher
 
-- [git](https://git-scm.com/download/win) 
-  
-- [Poetry](https://python-poetry.org/) for virtual environment management. 
+- [git](https://git-scm.com/download/win)
+
+- [Poetry](https://python-poetry.org/) for virtual environment management.
 
 - [go-task](https://taskfile.dev/) - a cross-platform task runner (a Make alternative)
 
@@ -15,7 +15,7 @@ This project requires the following software to be installed on your system:
 
 ## Python
 
-If your OS already ships with python, you don't have to do much. If this is not the case, or if you wish to upgrade your version or install multiple python versions, [Anaconda](https://docs.anaconda.com/anaconda/install/) is recommended to manage the python versions installed on your system. 
+If your OS already ships with python, you don't have to do much. If this is not the case, or if you wish to upgrade your version or install multiple python versions, [Anaconda](https://docs.anaconda.com/anaconda/install/) is recommended to manage the python versions installed on your system.
 
 
 ## Git
@@ -34,7 +34,7 @@ sudo apt get install git
 
 ## Cookiecutter installation
 
-Simply run 
+Simply run
 
 ```shell
 pip install cookiecutter

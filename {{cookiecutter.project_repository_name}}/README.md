@@ -17,9 +17,9 @@ Installation instructions for these tools and other prerequisites can be found a
 Simply run `task initialise-project` to get started. For some more information regarding installation instructions, downloading data and using jupiter, please refer to [/docs/project_installation_instructions.md](/docs/project_installation_instructions.md).
 
 <!---
-It is advised to not adjust the text above, in order to make it easier to update this file when the project is updated according to the latest version of the project template. 
+It is advised to not adjust the text above, in order to make it easier to update this file when the project is updated according to the latest version of the project template.
 
-Write your project-specific readme information below this comment. After updating, the previous text will be gone. 
+Write your project-specific readme information below this comment. After updating, the previous text will be gone.
 However, simply discard the Hunk deleting your text and it will be back.
 -->
 

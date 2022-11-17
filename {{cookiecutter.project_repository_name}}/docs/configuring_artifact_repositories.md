@@ -22,13 +22,13 @@ task publish-package-pypi
 
 ## Google Artifact Registry
 
-A robust method of authenticating with Google Artifact Registry, is to download a Service Account's key. To obtain such a key, follow the instructions at [this google documentation page](https://cloud.google.com/artifact-registry/docs/python/authentication#sa-key). 
+A robust method of authenticating with Google Artifact Registry, is to download a Service Account's key. To obtain such a key, follow the instructions at [this google documentation page](https://cloud.google.com/artifact-registry/docs/python/authentication#sa-key).
 
 If you are using this method, then the value of `GCP_ARTIFACT_USER` will be `_json_key_base64` and the valye of `GCP_ARTIFACT_PASSWORD` will be a long-ass string. These values should be used in the commands below and/or set in the [/{{cookiecutter.project_repository_name}}.env](/{{cookiecutter.project_repository_name}}.env) file.
 
 ### Installing from Google Artifact Registry
 
-If you're using a private Google Artifact Registry, be sure to add the following snippet to [pyproject.toml](/pyproject.toml), e.g. directly after the dependency specifications. 
+If you're using a private Google Artifact Registry, be sure to add the following snippet to [pyproject.toml](/pyproject.toml), e.g. directly after the dependency specifications.
 Be sure to replace `<GCP_ARTIFACT_URL>` with the correct URL.
 
 ```
