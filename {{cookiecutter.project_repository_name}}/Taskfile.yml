@@ -21,12 +21,11 @@ tasks:
       - echo "----------------------"
       - echo "- Installing poetry virtual environment.."
       - echo "----------------------"
-      {% raw %}
-      - echo "path {{.PYTHON_PATH}}"
       - poetry self update
       - poetry run pip install --upgrade pip
+      {% raw %}
       - poetry env use {{shellQuote .PYTHON_PATH}}
-      {% end raw %}
+      {% endraw %}
       - poetry install
       - echo "Finished installing virtual environment."
     vars:
@@ -86,7 +85,8 @@ tasks:
   initialise-project:
     desc: "\n    Initialises your project by: \n     1) creating the poetry virtual environment \n     2) Installing pre-commit \n     3) Registering the virtual environment as jupyter kernel"
     cmds:
-      - cp {{cookiecutter.project_repository_name}}.env.template {{cookiecutter.project_repository_name}}.env
+      - '{{if eq OS "windows"}}powershell "copy pi-init.env.template pi-init.env"{{end}}'
+      - '{{if eq OS "linux"}}cp pi-init.env.template pi-init.env{{end}}'
       - task: poetry
       - task: pre-commit-install
       - task: register-jupyter-kernel
@@ -134,7 +134,7 @@ tasks:
       - echo "- Package publisched successfully to Pypi."
       - echo "----------------------"
     silent: true
-  
+
   publish-package-google-artifacts:
     desc: Upload {{cookiecutter.python_package_name}} to Google Artifact Registry.
     cmds:
