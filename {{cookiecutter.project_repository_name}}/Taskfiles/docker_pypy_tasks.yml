@@ -15,17 +15,17 @@ tasks:
   run:
     desc: Start a container using your project's Docker image with the Pypy Python interpreter.
     cmds:
-      - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy
+      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy
     silent: true
 
   test:
     desc: Execute your project's tests in a Docker container with the Pypy Python interpreter.
     cmds:
-      - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy "make pytest"
+      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy "task pytest"
     silent: true
 
   inspect:
     desc: Start a container with the Pypy Python interpreter and open a shell to inspect its contents and execute commands.
     cmds:
-      - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy /bin/bash
+      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy /bin/bash
     silent: true

@@ -2,7 +2,10 @@
 FROM python:{{cookiecutter.minimum_python_version}}-slim
 
 # Don't create a virtual env and instead use system python
-ENV POETRY_VIRTUALENVS_CREATE=false
+ENV POETRY_VIRTUALENVS_CREATE=false \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on
 
 # Enable if you want to use a specific poetry version
 # POETRY_VERSION=1.2.2
@@ -14,13 +17,17 @@ RUN apt-get update && \
 	build-essential \
 	curl \
 	git \
-	gcc
+	gcc && \
+	sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
 
 # Create new user which will run the code, so we aren't running as root
 RUN useradd --create-home python_user
 
 # Change owner of /opt folder, to maintain compatibility with the venv_Dockerfile
 RUN chown -R python_user:python_user /opt
+
+# Change the owner of the location where python installs stuff when no virtual environment is used
+RUN chown -R python_user:python_user /usr/local/
 
 # Install poetry
 USER python_user
@@ -53,12 +60,17 @@ COPY --chown=python_user:python_user ./pyproject.toml /home/python_user/{{cookie
 COPY --chown=python_user:python_user ./poetry.lock /home/python_user/{{cookiecutter.project_repository_name}}/poetry.lock
 RUN poetry install --only main
 
+# Install all other dependency groups, including development dependencies. Comment / change this line if this is undesired.
+RUN poetry install
+
 # Copy supporting files, if relevant
 # COPY --chown=python_user:python_user file_to_copy destination_file
 
-# Copy application code and install package with pypoetry
+# Copy application code
 COPY --chown=python_user:python_user ./{{cookiecutter.python_package_name}}/ ./{{cookiecutter.python_package_name}}
 COPY --chown=python_user:python_user ./tests/ ./tests/
+COPY --chown=python_user:python_user ./Taskfile.yml ./Taskfile.yml
+COPY --chown=python_user:python_user ./Taskfiles/ ./Taskfiles/
 
 # Run code with pypoetry
 CMD poetry run python {{cookiecutter.python_package_name}}/scripts/deployment/container_entry_point.py

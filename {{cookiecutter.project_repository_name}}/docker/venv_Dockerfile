@@ -2,7 +2,10 @@
 FROM python:{{cookiecutter.minimum_python_version}}-slim
 
 # Don't create a virtual env and instead use system python
-ENV POETRY_VIRTUALENVS_CREATE=false
+ENV POETRY_VIRTUALENVS_CREATE=false \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on
 
 # Enable if you want to use a specific poetry version
 # POETRY_VERSION=1.2.2
@@ -14,13 +17,17 @@ RUN apt-get update && \
 	build-essential \
 	curl \
 	git \
-	gcc
+	gcc && \
+	sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
 
 # Create new user which will run the code, so we aren't running as root
 RUN useradd --create-home python_user
 
 # Change owner of /opt folder so we can create a link to it later
 RUN chown -R python_user:python_user /opt
+
+# Change the owner of the location where python installs stuff when no virtual environment is used
+RUN chown -R python_user:python_user /usr/local/
 
 # Install poetry
 USER python_user

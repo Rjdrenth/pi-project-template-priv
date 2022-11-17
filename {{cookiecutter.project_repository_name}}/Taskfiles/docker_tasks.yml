@@ -15,17 +15,17 @@ tasks:
   run:
     desc: Start a container using your project's Docker image.
     cmds:
-      - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}
+      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}
     silent: true
 
   test:
     desc: Execute your project's tests in a Docker container.
     cmds:
-      - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}} "make pytest"
+      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}} "task pytest"
     silent: true
 
   inspect:
     desc: Start a container and open a shell to inspect its contents and execute commands.
     cmds:
-      - docker run  --rm -it --network="host" --env-file {{cookiecutter.python_package_name}}.env --name {{cookiecutter.python_package_name}} -v .${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}} /bin/bash
+      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}} /bin/bash
     silent: true
