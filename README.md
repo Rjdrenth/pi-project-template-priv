@@ -1,7 +1,7 @@
 # π Python Project Template - PRIVATE TESTING GROUND
 
 
-![](https://img.shields.io/badge/π__project__template-0.7.1-green) 
+![](https://img.shields.io/badge/π__project__template-0.7.1-green)
 
 The current version of the π project template is `0.7.1`
 
@@ -17,7 +17,7 @@ Get inspiration:
 This is an opinionated project template for:
 
 - Python-based (Data Science) projects that need to be deployed
-- Windows / Unix / WSL-based development 
+- Windows / Unix / WSL-based development
 - Deployments using Docker
 
 It assumes the user attempts to write proper python code and/or applications which may or may not:
@@ -30,8 +30,8 @@ It assumes the user attempts to write proper python code and/or applications whi
 
 This Python project template features the following project tools:
 
-- [Poetry](https://python-poetry.org/) for virtual environment & dependency management. 
-- [pre-commit](https://pre-commit.com/) to enforce code guidelines and keep a clean repository.
+- [Poetry](https://python-poetry.org/) for virtual environment & dependency management.
+- [Pre-commit](https://pre-commit.com/) to enforce code guidelines and keep a clean repository with every commit.
 - A [Jupyter](https://jupyter.org/) notebook template.
 - A [Task](https://taskfile.dev) Taskfile (which is a cross-platform Make alternative) to run tasks to make life easier.
 - A [Docker](https://www.docker.com/)-based development environment for Windows users working on Linux projects.
@@ -85,7 +85,7 @@ The following parameters can be set during project initialisation:
 
 ### Initialising your project
 
-Initialising your project for development includes: 
+Initialising your project for development includes:
 - Install the Poetry virtual environment
 - Registering the virtual environment as a Jupyter kernel, in case you're working with notebooks
 - Installing pre-commit, to ensure consistent coding style
@@ -106,7 +106,7 @@ In order to update an older project based on this project template so it uses th
 task update-project-template
 ```
 
-This should update all relevant files. 
+This should update all relevant files.
 
 Do note that it does this by overwriting any and all changes you have made to the files that are supplied by default with the project template if they have been updated. Most notably you will have to manually inspect the following files so you don't delete anything accidentally:
 
@@ -128,7 +128,7 @@ Thanks to:
 
 - [Mediquest](https://home.mediquest.nl/) for allowing me to create an open source version of the project template I developed during my employment with them.
 - [Cookiecutter](https://github.com/cookiecutter/cookiecutter) for providing an excellent project template framework
-- [TezRomacH's python project template](https://github.com/TezRomacH/python-package-template) for inspiration, which might be an even better fit for you, depending on your needs. 
+- [TezRomacH's python project template](https://github.com/TezRomacH/python-package-template) for inspiration, which might be an even better fit for you, depending on your needs.
 
 ### License
 

@@ -6,9 +6,7 @@ Poetry is used to manage your project's dependencies and virtual environment. I 
 
 ## Pre-commit
 
-Configuration is located in [.pre-commit-config.yaml](/{{cookiecutter.project_repository_name}}/.pre-commit-config.yaml)
-
-Features:
+[Pre-commit](https://pre-commit.com/) is a tool that runs a set of tasks right before a commit is made. The provided configuration, located in [.pre-commit-config.yaml](/{{cookiecutter.project_repository_name}}/.pre-commit-config.yaml), has the following features:
 
 - Code formatting with [Black](https://github.com/psf/black)
 - Import sorting with [isort](https://pycqa.github.io/isort/)
@@ -17,7 +15,7 @@ Features:
 - Prevent large files from being committed. Remove the hook with id `check-added-large-files` to disable.
 - Enforce `Black` code guidelines. Remove the hook with id `black` to disable.
 
-  - Change settings in the `[tool.black]` section in [pyproject.toml](/{{cookiecutter.project_repository_name}}/pyproject.toml), such as line length. 
+  - Change settings in the `[tool.black]` section in [pyproject.toml](/{{cookiecutter.project_repository_name}}/pyproject.toml), such as line length.
 
 ## Jupyter Notebook template
 
@@ -29,7 +27,9 @@ The Jupyter notebook template features the following:
 
 ## Task
 
-The [Taskfile.yml](/{{cookiecutter.project_repository_name}}/Taskfile.yml) file contains various commands to help you manage your project.
+[Task](https://taskfile.dev) is a cross-platform task runner and can be used to provide command-line shorthands for various project-related tasks that are performed often or as a shorthand for long commands. It is an alternative to [Make](https://www.gnu.org/software/make/), which was designed for Unix platforms.
+
+The [Taskfile.yml](/Taskfile.yml) file contains the configuration for various commands to help you manage your project and can be extended with what is relevant for your project.
 
 Every task can be called by typing `task <task_name>` within your repository root. Typing `task` displays the available commands:
 
@@ -68,7 +68,7 @@ The [/docker](/{{cookiecutter.project_repository_name}}/docker) folder contains 
 - [Dockerfile](/{{cookiecutter.project_repository_name}}/docker/Dockerfile) - Your basic Dockerfile for a basic Docker-based deployment. It installs the project and all dependencies as a non-root user and calls the script at [<your_package_name>/scripts/deployment/container_entry_point.py](/{{cookiecutter.project_repository_name}}/{{cookiecutter.python_package_name}}/scripts/deployment/container_entry_point.py) when the container starts.
 
 - [venv_Dockerfile](/{{cookiecutter.project_repository_name}}/docker/venv_Dockerfile) - A Dockerfile that is very much the same as the basic Dockerfile with a few key differences:
-  
+
   - Development dependencies are also installed, as this image is meant to be used for development
   - It starts a Jupyter server instead of executing the `container_entry_point.py` script.
   - Your project's code is not copied to the image. Instead, your project root is mounted when a container is started (using the corresponding `task docker_venv:run` command)
@@ -76,7 +76,7 @@ The [/docker](/{{cookiecutter.project_repository_name}}/docker) folder contains 
   - To use the corresponding `task` commands, you will need to uncommend the line `# docker_venv: Taskfiles/docker_venv_tasks.yml` in the `include` section of the [Taskfile.yml](/{{cookiecutter.project_repository_name}}/Taskfile.yml).
 
 
-- [pypy_Dockerfile](/{{cookiecutter.project_repository_name}}/docker/pypy_Dockerfile) - Your basic Pypy Dockerfile for a basic Docker-based deployment. It installs the project and all dependencies as a non-root user and calls the script at [<your_package_name>/scripts/deployment/container_entry_point.py](/{{cookiecutter.project_repository_name}}/{{cookiecutter.python_package_name}}/scripts/deployment/container_entry_point.py) when the container starts. 
+- [pypy_Dockerfile](/{{cookiecutter.project_repository_name}}/docker/pypy_Dockerfile) - Your basic Pypy Dockerfile for a basic Docker-based deployment. It installs the project and all dependencies as a non-root user and calls the script at [<your_package_name>/scripts/deployment/container_entry_point.py](/{{cookiecutter.project_repository_name}}/{{cookiecutter.python_package_name}}/scripts/deployment/container_entry_point.py) when the container starts.
 
   - To use the corresponding `task` commands, you will need to uncommend the line `# docker_pypy: Taskfiles/docker_pypy_tasks.yml` in the `include` section of the [Taskfile.yml](/{{cookiecutter.project_repository_name}}/Taskfile.yml).
 
@@ -103,6 +103,6 @@ To publish your package to PyPI, you need to:
 To publish your package to Google Artifact Registry, you need to:
 
 - Have access to a Artifact Registry.
-- Follow the instructions in [/docs/configuring_artifact_repositories.md](/{{cookiecutter.project_repository_name}}/docs/configuring_artifact_repositories.md) to configure your environment. 
+- Follow the instructions in [/docs/configuring_artifact_repositories.md](/{{cookiecutter.project_repository_name}}/docs/configuring_artifact_repositories.md) to configure your environment.
 - Increase your package's version number using the `task bump-version-patch`, `task bump-version-minor` or `task bump-version-major` commands.
 - Actually publish it with the `task publish-package-google-artifacts` command.
