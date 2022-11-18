@@ -11,6 +11,9 @@ Get inspiration:
 - https://github.com/jacebrowning/template-python
 - https://github.com/MartinHeinz/python-project-blueprint
 
+- https://stackoverflow.com/questions/53835198/integrating-python-poetry-with-docker
+- https://github.com/wemake-services/wemake-django-template/blob/master/%7B%7Bcookiecutter.project_name%7D%7D/docker/django/Dockerfile
+
 
 ## About the project template
 
@@ -68,7 +71,7 @@ If you're starting a new project, perform the following steps:
 - Create a new repository in your git repository provider of choice, e.g. github, gitlab or bitbucket.  
 - Clone the repository of your project to your local disk.
 
-- Next, initialiase your new project using the cookiecutter project template, by executing the following command (in the same directory into which you cloned the repository, not yet in the repository root):
+- Next, initialiase your new project using the cookiecutter project template, by executing the following command *in the same directory into which you cloned the repository, not yet in the repository root*:
   ```shell
   cookiecutter --overwrite-if-exists git+ssh://git@github.com/Rjdrenth/pi-project-template.git
   ```
@@ -90,7 +93,7 @@ Initialising your project for development includes:
 - Registering the virtual environment as a Jupyter kernel, in case you're working with notebooks
 - Installing pre-commit, to ensure consistent coding style
 
-This is performed automatically and is as simple as running the following command:
+This is performed automatically and is as simple as running the following command *within your project folder, the repository root*:
 
 ```shell
 task initialise-project

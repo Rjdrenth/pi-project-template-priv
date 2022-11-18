@@ -1,14 +1,19 @@
 # Python Image
 FROM python:{{cookiecutter.minimum_python_version}}-slim
 
-# Don't create a virtual env and instead use system python
-ENV POETRY_VIRTUALENVS_CREATE=false \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on
+ARG DEPLOYMENT_ENV
 
-# Enable if you want to use a specific poetry version
-# POETRY_VERSION=1.2.2
+# Don't create a virtual env and instead use system python
+ENV DEPLOYMENT_ENV=${DEPLOYMENT_ENV} \
+	# python:
+	PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    # poetry:
+	POETRY_VIRTUALENVS_CREATE=false
+    
+	# Enable if you want to use a specific poetry version, and add "\  to the line above
+	# POETRY_VERSION=1.2.2
 
 # Install unix dependencies
 RUN apt-get update && \
@@ -58,10 +63,10 @@ RUN mkdir {{cookiecutter.python_package_name}} && touch ./{{cookiecutter.python_
 # Install dependencies WITHOUT development dependencies
 COPY --chown=python_user:python_user ./pyproject.toml /home/python_user/{{cookiecutter.project_repository_name}}/pyproject.toml
 COPY --chown=python_user:python_user ./poetry.lock /home/python_user/{{cookiecutter.project_repository_name}}/poetry.lock
-RUN poetry install --only main
+RUN poetry install --without dev
 
-# Install all other dependency groups, including development dependencies. Comment / change this line if this is undesired.
-RUN poetry install
+# Install development dependencies if relevant
+RUN poetry install $(test "$DEPLOYMENT_ENV" == "production" && echo "--without dev") --no-interaction --no-ansi
 
 # Copy supporting files, if relevant
 # COPY --chown=python_user:python_user file_to_copy destination_file

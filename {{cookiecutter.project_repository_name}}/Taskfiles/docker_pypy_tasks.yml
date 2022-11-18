@@ -21,7 +21,7 @@ tasks:
   test:
     desc: Execute your project's tests in a Docker container with the Pypy Python interpreter.
     cmds:
-      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy "task pytest"
+      - docker run --rm -it --network="host" --env-file {{cookiecutter.project_repository_name}}.env --name {{cookiecutter.python_package_name}} -v ${PWD}/data:/home/python_user/{{cookiecutter.project_repository_name}}/data {{cookiecutter.python_package_name}}_pypy /bin/bash -c "task pytest"
     silent: true
 
   inspect:
