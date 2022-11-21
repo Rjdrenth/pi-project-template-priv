@@ -1,7 +1,7 @@
 # Python Image
 FROM python:{{cookiecutter.minimum_python_version}}-slim
 
-ARG DEPLOYMENT_ENV
+ARG DEPLOYMENT_ENV=develop
 
 # Don't create a virtual env and instead use system python
 ENV DEPLOYMENT_ENV=${DEPLOYMENT_ENV} \
