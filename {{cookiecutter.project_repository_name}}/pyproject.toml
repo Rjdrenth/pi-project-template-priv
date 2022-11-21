@@ -12,9 +12,9 @@ python-dotenv = "^0.20.0"
 black = "^22.10.0"
 cookiecutter = "^2.1.1"
 ipykernel = "^5.3.0"
-isort = "^5.8.0"
+isort = "^5.10.1"
 nb-black-only = ">=1.0.9"
-pre-commit = "^2.11.1"
+pre-commit = "^2.20.0"
 pytest = "^6.2.5"
 
 # [tool.poetry.group.project_management.dependencies] # Available from poetry >= 1.2
