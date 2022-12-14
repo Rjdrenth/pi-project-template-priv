@@ -16,8 +16,6 @@ isort = "^5.10.1"
 nb-black-only = ">=1.0.9"
 pre-commit = "^2.20.0"
 pytest = "^6.2.5"
-
-# [tool.poetry.group.project_management.dependencies] # Available from poetry >= 1.2
 bump2version = "^1.0.1"
 
 [build-system]

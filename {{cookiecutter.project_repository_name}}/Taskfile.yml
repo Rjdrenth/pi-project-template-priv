@@ -43,7 +43,7 @@ tasks:
       - echo "- Registering poetry environment as jupyter kernel with name '{{cookiecutter.python_package_name}}'.."
       - echo "----------------------"
       - poetry install
-      - poetry add --dev ipykernel
+      - poetry add --group dev ipykernel
       - poetry run python -m ipykernel install --user --name={{cookiecutter.python_package_name}}
       - echo "Finished registering jupyter kernel."
     silent: true
