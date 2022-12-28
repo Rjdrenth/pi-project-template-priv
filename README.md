@@ -15,6 +15,15 @@ Get inspiration:
 - https://github.com/wemake-services/wemake-django-template/blob/master/%7B%7Bcookiecutter.project_name%7D%7D/docker/django/Dockerfile
 
 
+## TLDR
+
+If you've done this before:
+
+```shell
+cookiecutter --overwrite-if-exists git+ssh://git@github.com/Rjdrenth/pi-project-template.git
+```
+
+
 ## About the project template
 
 This is an opinionated project template for:
