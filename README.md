@@ -19,8 +19,10 @@ Get inspiration:
 
 If you've done this before:
 
+**note: remove priv part in URL!!!**
+
 ```shell
-cookiecutter --overwrite-if-exists git+ssh://git@github.com/Rjdrenth/pi-project-template.git
+cookiecutter --overwrite-if-exists git+ssh://git@github.com/Rjdrenth/pi-project-template-priv.git
 ```
 
 
