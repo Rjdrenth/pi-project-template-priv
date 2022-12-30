@@ -11,8 +11,9 @@ cache/
 # Visual studio files
 /.vscode/
 
-# Pycharm settings directory
-.idea/
+# Irrelevant Pycharm settings
+.idea/workspace.xml
+.idea/tasks.xml
 
 # Compiled python files
 *.pyc
