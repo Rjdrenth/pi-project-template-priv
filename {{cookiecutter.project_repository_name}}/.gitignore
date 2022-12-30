@@ -6,6 +6,7 @@
 
 # Downloaded python wheels
 artifacts/
+cache/
 
 # Visual studio files
 /.vscode/
