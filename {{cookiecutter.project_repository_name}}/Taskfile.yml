@@ -180,3 +180,10 @@ tasks:
       - echo "- Virtual environment has been reset!"
       - echo "----------------------"
     silent: true
+
+  coverage:
+    desc: Calculate test coverage
+    cmds:
+      - poetry run pytest --cov-report html --cov={{cookiecutter.python_package_name}} tests/
+      - poetry run coverage-badge -o assets/images/coverage.svg -f
+    silent: true

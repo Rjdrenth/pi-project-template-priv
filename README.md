@@ -51,6 +51,7 @@ This Python project template features the following project tools:
 - A [Docker](https://www.docker.com/)-based development environment for Windows users working on Linux projects.
 - Simple testing using [Pytest](https://pytest.org).
 - Version management using [bump2version](https://github.com/c4urself/bump2version)
+- Test coverage calculation using the `pytest` and `coverage` libraries.
 
 - Supports publishing a package to and installing packages from various public or private repositories. See [/docs/configuring_artifact_repositories.md](/{{cookiecutter.project_repository_name}}/docs/configuring_artifact_repositories.md) for instructions:
 

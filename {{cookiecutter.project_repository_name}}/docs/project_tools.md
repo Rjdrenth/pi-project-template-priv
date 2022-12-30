@@ -40,6 +40,7 @@ task: Available tasks for this project:
 * bump-version-major:       Increases the major version of your project according to semantic versioning. In "x.y.z" the "x" is increased.
 * bump-version-minor:       Increases the minor version of your project according to semantic versioning. In "x.y.z" the "y" is increased.
 * bump-version-patch:       Increases the patch version of your project according to semantic versioning. In "x.y.z" the "z" is increased.
+* coverage:                 Calculate test coverage
 * docker:build:             Build a Docker image to run/deploy your project.
 * docker:inspect:           Start a container and open a shell to inspect its contents and execute commands.
 * docker:run:               Start a container using your project's Docker image.
