@@ -22,10 +22,10 @@ tasks:
       - echo "- Installing poetry virtual environment.."
       - echo "----------------------"
       - poetry self update
-      - poetry run pip install --upgrade pip
       {% raw %}
       - poetry env use {{shellQuote .PYTHON_PATH}}
       {% endraw %}
+      - poetry run pip install --upgrade pip
       - poetry install
       - echo "Finished installing virtual environment."
     vars:
