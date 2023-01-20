@@ -19,7 +19,7 @@ Get inspiration:
 
 If you've done this before:
 
-**note: remove priv part in URL!!!**
+**note: remove priv part in URL!!!** ALSO IN THE UPDATE_PROJECT_TEMPLATE.PY script!!!
 
 ```shell
 cookiecutter --overwrite-if-exists git+ssh://git@github.com/Rjdrenth/pi-project-template-priv.git

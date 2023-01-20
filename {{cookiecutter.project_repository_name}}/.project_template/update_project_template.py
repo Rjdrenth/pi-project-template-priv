@@ -42,7 +42,7 @@ def _create_temp_project(repo_root, repo_parent_dir):
             str(repo_root / ".project_template" / "cookiecutter_replay.json"),
             "--output-dir",
             str(repo_parent_dir),
-            "git+ssh://git@github.com/Rjdrenth/mu-project-template.git",
+            "git+ssh://git@github.com/Rjdrenth/pi-project-template-priv.git",
         ],
         capture_output=True,
         text=True,
