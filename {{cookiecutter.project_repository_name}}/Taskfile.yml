@@ -151,6 +151,21 @@ tasks:
       - echo "----------------------"
     silent: true
 
+  update-project-template:
+    desc: Updates the project files according to the latest version of the project template.
+    cmds:
+      - echo ""
+      - echo "----------------------"
+      - echo "- Updating project according to project template..."
+      - echo "----------------------"
+      - poetry run python ./.project_template/update_project_template.py
+      - echo "----------------------"
+      - echo "- Project has been updated according to the latest version of the project template."
+      - echo "- Note: You must MANUALLY verify what changes were made!"
+      - echo "-       Some changes might not be appliccable for a specific project"
+      - echo "----------------------"
+    silent: true
+
   delete-venv:
     # desc: Deletes your virtual environment.
     cmds:
