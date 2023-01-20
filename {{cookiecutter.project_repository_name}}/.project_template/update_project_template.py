@@ -79,8 +79,8 @@ def patch_file(repo_parent_dir, repo_root, temp_repo_root, file_to_update: Path)
     print(f"Updating {file_to_update}")
 
     # Create Path objects referencing to the file that is to be updated in both the actual repo and temporary repo.
-    file_path_to_update = Path(".") / Path(repo_root.name) / file_to_update
-    potentially_updated_file = Path(".") / Path(temp_repo_root.name) / file_to_update
+    file_path_to_update = repo_parent_dir / Path(repo_root.name) / file_to_update
+    potentially_updated_file = repo_parent_dir / Path(temp_repo_root.name) / file_to_update
 
     # Simply copy the file
     shutil.copy(potentially_updated_file, file_path_to_update)
