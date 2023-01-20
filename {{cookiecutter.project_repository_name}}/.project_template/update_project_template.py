@@ -82,42 +82,8 @@ def patch_file(repo_parent_dir, repo_root, temp_repo_root, file_to_update: Path)
     file_path_to_update = Path(".") / Path(repo_root.name) / file_to_update
     potentially_updated_file = Path(".") / Path(temp_repo_root.name) / file_to_update
 
-    # Change to the directory containing the actual repo and temporary repo, so we can create the git diff patch file.
-    os.chdir(repo_parent_dir)
-
-    # If it's a new file that does not exist in the actual repo, create it.
-    if not file_path_to_update.exists():
-        file_path_to_update.parent.mkdir(parents=True, exist_ok=True)
-        file_path_to_update.touch()
-
-    # Create the git diff patch file
-    patch_name = f"{file_to_update.name}.patch"
-    completed_process = subprocess.run(
-        [
-            "git",
-            "diff",
-            "--no-index",
-            "--diff-filter=d",
-            f"--output={patch_name}",
-            "--",
-            f"{file_path_to_update}",
-            f"{potentially_updated_file}",
-        ],
-        capture_output=True,
-        text=True,
-        input="yes",
-    )
-    # print(completed_process)
-
-    # Change working dir to the repo root
-    os.chdir(repo_root)
-
-    # Then apply the patch in it
-    completed_process = subprocess.run(["git", "apply", "-p2", f"{repo_parent_dir / patch_name}"])
-    # print(completed_process)
-
-    # Delete the patch file
-    Path(repo_parent_dir / patch_name).unlink()
+    # Simply copy the file
+    shutil.copy(potentially_updated_file, file_path_to_update)
 
 
 if __name__ == "__main__":
