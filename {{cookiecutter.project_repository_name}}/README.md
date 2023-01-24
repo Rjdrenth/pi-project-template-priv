@@ -24,7 +24,7 @@ Write your project-specific readme information below this comment. After updatin
 However, simply discard the Hunk deleting your text and it will be back.
 -->
 
-## Configuration
+### Configuration
 
 Be sure to:
 

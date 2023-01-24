@@ -116,8 +116,9 @@ tasks:
       {% raw %}
       - '{{if eq OS "windows"}}powershell "mkdir -Force dist"{{end}}'
       - '{{if eq OS "linux"}}mkdir -p dist{{end}}'
+      - '{{if eq OS "windows"}}powershell "rm ./dist/*"{{end}}'
+      - '{{if eq OS "linux"}}rm ./dist/*{{end}}'
       {% endraw %}
-      - rm ./dist/*
       - poetry build
     silent: true
 
