@@ -85,10 +85,8 @@ tasks:
   initialise-project:
     desc: "\n    Initialises your project by: \n     1) creating the poetry virtual environment \n     2) Installing pre-commit \n     3) Registering the virtual environment as jupyter kernel"
     cmds:
-      {% raw %}
-      - '{{if eq OS "windows"}}powershell "copy {{cookiecutter.project_repository_name}}.env.template {{cookiecutter.project_repository_name}}.env"{{end}}'
-      - '{{if eq OS "linux"}}cp {{cookiecutter.project_repository_name}}.env.template {{cookiecutter.project_repository_name}}.env{{end}}'
-      {% endraw %}
+      - {% raw %}'{{if eq OS "windows"}}{% endraw %}powershell "copy {{cookiecutter.project_repository_name}}.env.template {{cookiecutter.project_repository_name}}.env"{% raw %}{{end}}{% endraw %}'
+      - {% raw %}'{{if eq OS "linux"}}{% endraw %}cp {{cookiecutter.project_repository_name}}.env.template {{cookiecutter.project_repository_name}}.env{% raw %}{{end}}{% endraw %}'
       - task: poetry
       - task: pre-commit-install
       - task: register-jupyter-kernel
