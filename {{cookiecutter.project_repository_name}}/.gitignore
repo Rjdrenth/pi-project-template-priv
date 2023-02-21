@@ -11,7 +11,7 @@ cache/
 # Visual studio files
 /.vscode/
 
-# Reference for Jetbrains related ignore stuff: 
+# Reference for Jetbrains related ignore stuff:
 # - https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 # - https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 

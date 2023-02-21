@@ -11,7 +11,7 @@ ENV DEPLOYMENT_ENV=${DEPLOYMENT_ENV} \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     # poetry:
 	POETRY_VIRTUALENVS_CREATE=false
-    
+
 	# Enable if you want to use a specific poetry version, and add "\  to the line above
 	# POETRY_VERSION=1.2.2
 
